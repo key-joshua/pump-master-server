@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import { v2 } from 'cloudinary';
 import StatusCodes from 'http-status-codes';
 import responseUtils from '../utils/responseUtils';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 
 dotenv.config();
 
@@ -11,9 +12,16 @@ v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
 });
 
-const uploadService = async (req, res, next) => {
-  const singleFile = req?.files?.file;
-  const multipleFiles = req?.files?.attachments;
+interface FileRequest extends Request {
+  files?: {
+    file?: any;
+    attachments?: any;
+  };
+}
+
+const uploadService: RequestHandler = async (req: FileRequest, res: Response, next: NextFunction) => {
+  const singleFile = req.files?.file;
+  const multipleFiles = req.files?.attachments;
 
   // === Handle Single File ===
   if (singleFile) {
