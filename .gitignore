@@ -1,0 +1,16 @@
+ngrok-v3-stable-windows-amd64/
+src/database/seeders/
+database/seeders/
+node_modules/
+deployment/
+src/temp/
+dist
+
+package-lock.json
+.dockerignore
+script.json
+Dockerfile
+.vscode
+id_rsa
+.env
+dist
